@@ -219,6 +219,14 @@ text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.18);
   
 }
+#addr{
+
+  background-image: url("./images/home5.jpg"); 
+  background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  
+}
 
 
 #set{
@@ -278,7 +286,7 @@ text-align: center;
 
 .sidebar {
   position: relative;
-  top: 9%;
+  top: 0;
   bottom: 20%;
   left: 0;
   height:70%;

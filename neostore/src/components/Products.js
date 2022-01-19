@@ -74,18 +74,17 @@ function Products() {
   //////////////////////////////////////////////////////////////////
 
   return (
-    <div className="container-fluid row ">
+    <div className="row ">
       <nav
         id="sidebarMenu"
-        style={{ height: "550px" }}
-        className="collapse d-lg-block sidebar collapse bg-white col-md-3 ms-4"
+        style={{ height: "700px" }}
+        className="collapse mb-5 d-lg-block sidebar bg-white col-md-3 m-4"
       >
-        <div className="position-sticky p-2">
+        <div className="row position-sticky p-2 ms-3">
           <div className="list-group list-group-flush ">
             <input
-              className="p-3 m-3 bg-dark text-light btn-dark"
+              className="p-3 m-1 bg-dark text-light btn-dark"
               type="text"
-              style={{ marginLeft: "35px" }}
               placeholder="Search....."
               onChange={(event) => {
                 setSearch(event.target.value);
@@ -152,10 +151,11 @@ function Products() {
       </nav>
 
       <div className="row justify-content-center m-2 col-md-9">
-        <h5 className="text-center alert-warning p-2 m-1">
-          <div style={{ borderRadius: "40px" }}>
-            Let your home feel the style !!!!
-          </div>
+        <h5
+          className="text-center alert-warning p-2 m-1"
+          style={{ borderRadius: "10px", height: "55px" }}
+        >
+          <div>Let your home feel the style !!!!</div>
         </h5>
         {state.color !== "" && state.category !== ""
           ? postdata

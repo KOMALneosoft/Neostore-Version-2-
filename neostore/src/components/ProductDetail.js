@@ -56,7 +56,8 @@ function ProductDetail(props) {
                   data-image="black"
                   src={val.product_image}
                   alt=""
-                  height="65%"
+                  height="60%"
+                  width="80%"
                   id="prodetailimage"
                 />
               </div>
@@ -112,7 +113,7 @@ function ProductDetail(props) {
                     className="text-light"
                     style={{ textDecoration: "none" }}
                   >
-                    CANCEL
+                    Back
                   </Link>
                 </button>
               </div>

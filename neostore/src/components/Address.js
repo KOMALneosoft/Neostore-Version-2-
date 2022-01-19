@@ -81,11 +81,11 @@ function Address(props) {
   };
 
   return (
-    <div className="container-fluid " id="set">
+    <div className="container-fluid" id="addr">
       {userdata.map((val, index) =>
         val.email === email ? (
           <div className="page-content page-container ">
-            <div className="" style={{ width: "100%" }}>
+            <div className="row" style={{ width: "100%" }}>
               <div className="row container d-flex justify-content-center">
                 <div className="col-md-6">
                   <div className="card user-card-full container m-5">
@@ -134,28 +134,33 @@ function Address(props) {
                                     </h6>
 
                                     <div className="text-center row">
-                                      <button
-                                        type="button"
-                                        className="btn btn-dark m-1 ms-3 col-md-5"
-                                        onClick={(props) => deleteadd(addr._id)}
-                                      >
-                                        <Link
-                                          to="/address"
-                                          style={{
-                                            color: "white",
-                                            textDecoration: "none",
-                                          }}
+                                      <center>
+                                        {" "}
+                                        <button
+                                          type="button"
+                                          className="btn btn-dark m-1 ms-3 col-md-5"
+                                          onClick={(props) =>
+                                            deleteadd(addr._id)
+                                          }
                                         >
-                                          Delete
-                                        </Link>
-                                      </button>
-                                      <button
-                                        type="button"
-                                        className="btn btn-dark m-1 col-md-5"
-                                        onClick={(props) => edit(addr._id)}
-                                      >
-                                        Edit
-                                      </button>
+                                          <Link
+                                            to="/address"
+                                            style={{
+                                              color: "white",
+                                              textDecoration: "none",
+                                            }}
+                                          >
+                                            Delete
+                                          </Link>
+                                        </button>
+                                        <button
+                                          type="button"
+                                          className="btn btn-dark m-1 col-md-5"
+                                          onClick={(props) => edit(addr._id)}
+                                        >
+                                          Edit
+                                        </button>
+                                      </center>
                                     </div>
                                   </div>
                                 </div>
