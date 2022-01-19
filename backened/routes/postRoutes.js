@@ -460,8 +460,9 @@ function generateInvoiceTable(doc, order, sofaname) {
     "Rs.",
     order.price
   );
+  const GST = order.price * 0.05;
   const totalPosition2 = invoiceTableTop + (i + 1) * 40;
-  generateTableRow(doc, totalPosition2, "", "", "GST(5%)", "Rs.", "5600");
+  generateTableRow(doc, totalPosition2, "", "", "GST(5%)", "Rs.", GST);
   const totalPosition3 = invoiceTableTop + (i + 1) * 50;
   generateTableRow(
     doc,
@@ -470,7 +471,7 @@ function generateInvoiceTable(doc, order, sofaname) {
     "",
     "Total Price ",
     "Rs.",
-    order.price + 5600
+    order.price + GST
   );
 }
 function generateTableRow(doc, y, c1, c2, c3, c4, c5) {

@@ -6,6 +6,7 @@ function Myorder() {
   const [postdata, setPostdata] = useState([]);
   const [rdata, setRdata] = useState([]);
   const price = localStorage.getItem("price");
+  const prevprice = localStorage.getItem("prevsprice");
   console.log(price);
   useEffect(() => {
     getOrders().then((res) => {
@@ -34,7 +35,7 @@ function Myorder() {
       <div className="container-fluid row " style={{ height: "800px" }}>
         <div className="container-fluid row">
           {orderdata.map((val, index) =>
-            price == val.price ? (
+            prevprice == val.price ? (
               <div
                 className="row"
                 //  / style={{ width: "60%", backgroundColor: "lightsteelblue" }}
@@ -130,7 +131,7 @@ function Myorder() {
                                 Price:
                               </p>
                               <h6 className="col-sm-8 text-muted f-w-400">
-                                {val.price}
+                                Rs.{price}
                               </h6>
                             </div>
                             <br />

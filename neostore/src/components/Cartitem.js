@@ -36,10 +36,11 @@ const Cartitem = (props) => {
 
     setCard(e.target.value);
   };
+  ///////////////////////////////////////
   const add = (e) => {
     e.preventDefault();
-
-    localStorage.setItem("price", totprice);
+    localStorage.setItem("prevsprice", totprice);
+    localStorage.setItem("price", Final);
     axios
       .post("http://localhost:9000/api/addorder", {
         price: totprice,
@@ -67,8 +68,10 @@ const Cartitem = (props) => {
       }
     });
   };
-
+  ////////////////////////////////////////////
   let totprice = 0;
+  let GST = 0;
+  let Final = 0;
   let cartitem = [];
   console.log(cartitem);
   /////////////////////////////////////////
@@ -131,10 +134,12 @@ const Cartitem = (props) => {
                 <b>
                   Subtotal : Rs. {totprice}
                   <br />
-                  {totprice !== 0 ? <h6>GST(5%) : Rs.5600.00</h6> : null}
+                  {totprice !== 0 ? (
+                    <h6>GST(5%) : Rs.{(GST = totprice * 0.05)}</h6>
+                  ) : null}
                   <br />
                   {totprice !== 0 ? (
-                    <h3> Total : Rs. {(totprice = totprice + 5600)}.00</h3>
+                    <h3> Total : Rs. {(Final = totprice + GST)}</h3>
                   ) : null}
                 </b>
               </div>
