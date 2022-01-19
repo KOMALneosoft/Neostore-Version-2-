@@ -82,8 +82,6 @@ function Address(props) {
 
   return (
 
-    <div className="container-fluid" id="addr">
-
     <div className="container-fluid " id="addr">
 
       {userdata.map((val, index) =>
