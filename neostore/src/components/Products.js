@@ -74,7 +74,7 @@ function Products() {
   //////////////////////////////////////////////////////////////////
 
   return (
-    <div className="row ">
+    <div className="container-fluid row">
       <nav
         id="sidebarMenu"
         style={{ height: "700px" }}

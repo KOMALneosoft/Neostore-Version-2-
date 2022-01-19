@@ -22,7 +22,7 @@ function Navbar2() {
   };
 
   return (
-    <div className="row ">
+    <div className="">
       <nav className="navbar  bg-dark navbar-expand-sm text-light">
         <Link className="navbar-brand  col-md-3 text-light" to="/">
           <h3 className="ms-3">

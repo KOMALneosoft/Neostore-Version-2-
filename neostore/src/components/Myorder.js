@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
 import { getOrders, getPosts } from "../config/Myservice";
 
 function Myorder() {
@@ -31,36 +30,36 @@ function Myorder() {
   /////////////////////////////////////////////
 
   return (
-    <div style={{ height: "500px" }} className="container-fluid" id="myorder">
-      {orderdata.map((val, index) =>
-        price == val.price ? (
-          <div className="page-content page-container p-1 ">
-            <div
-              className="m-0"
-              //  / style={{ width: "60%", backgroundColor: "lightsteelblue" }}
-            >
+    <div id="myorder">
+      <div className="container-fluid row " style={{ height: "800px" }}>
+        <div className="container-fluid row">
+          {orderdata.map((val, index) =>
+            price == val.price ? (
               <div
-                style={{ width: "60%" }}
-                className="row container  d-flex justify-content-center"
-                id="order"
+                className="row"
+                //  / style={{ width: "60%", backgroundColor: "lightsteelblue" }}
               >
-                <div className="col-md-12">
-                  <div className="card user-card-full">
-                    <div className="row m-l-0 m-r-0">
-                      <div className="col-sm-12 text-center">
+                <div
+                  style={{ width: "60%" }}
+                  className="container  d-flex justify-content-center"
+                  id="order"
+                >
+                  <div className="row col-md-12 p-4">
+                    <div className="row m-l-0 p-4">
+                      <div className="card  text-center">
                         <div className="card-block row">
                           <h4
-                            className="col-sm-8"
+                            className="text-center"
                             style={{
                               fontFamily: "sans-serif",
                               fontWeight: "bold",
                             }}
                           >
-                            Information
+                            BILL
                           </h4>
 
                           <hr />
-                          <div className="row">
+                          <div className="row ">
                             <div className="row">
                               <p
                                 className="col-sm-4 "
@@ -76,6 +75,7 @@ function Myorder() {
                               </h6>
                             </div>
                             <br />
+                            <hr />
                             <div className="row">
                               <p
                                 className="col-sm-4 m-b-10 f-w-600 "
@@ -91,7 +91,8 @@ function Myorder() {
                               </h6>
                             </div>
                             <br />
-                            <div className="row">
+                            <hr />
+                            <div className="row p-0 mb-0">
                               <p
                                 className="col-sm-4 m-b-10 f-w-600"
                                 style={{
@@ -99,13 +100,25 @@ function Myorder() {
                                   fontWeight: "bold",
                                 }}
                               >
-                                Name:
+                                Product Name:
                               </p>
                               <h6 className="col-sm-8 text-muted f-w-400">
-                                {val.name}
+                                {val.name.map((ele, index) => (
+                                  <font color="purple">
+                                    <h6
+                                      style={{
+                                        borderBlockEnd: "0.2px solid black",
+                                      }}
+                                    >
+                                      {ele}
+                                    </h6>
+                                  </font>
+                                ))}
                               </h6>
                             </div>
                             <br />
+                            <hr />
+
                             <div className="row">
                               <p
                                 className="col-sm-4 m-b-10 f-w-600"
@@ -121,6 +134,7 @@ function Myorder() {
                               </h6>
                             </div>
                             <br />
+                            <hr />
                             <div className="row">
                               <p
                                 className="col-sm-4 m-b-10 f-w-600"
@@ -138,6 +152,18 @@ function Myorder() {
                           </div>
 
                           <hr />
+                          <div className="row p-4">
+                            <div classname="col-md-3 ">
+                              <form action="http://localhost:9000/api/download">
+                                <button
+                                  type="submit"
+                                  className="btn btn-dark m-2 col-md-4"
+                                >
+                                  Download PDF
+                                </button>
+                              </form>
+                            </div>
+                          </div>
                           <ul className="social-link row list-unstyled m-t-40 m-b-10 h3 mt-1">
                             <li className="col-md-5"></li>
                             <li className="col-md-2">
@@ -191,25 +217,11 @@ function Myorder() {
                     </div>
                   </div>
                 </div>
-                <div className="row ">
-                  <div classname="col-md-5">
-                    <form action="http://localhost:9000/api/download">
-                      <button
-                        type="submit"
-                        className="btn btn-dark m-2 col-md-5"
-                      >
-                        Download PDF
-                      </button>
-                    </form>
-                  </div>
-                </div>
               </div>
-
-              <hr />
-            </div>
-          </div>
-        ) : null
-      )}
+            ) : null
+          )}
+        </div>
+      </div>
     </div>
   );
 }

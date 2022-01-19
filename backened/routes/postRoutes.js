@@ -379,17 +379,6 @@ router.post("/invoice", (req, res) => {
     }
   }
   createInvoice(order, sofaname, "./invoices/invo.pdf");
-  let ins = new invoModal(order);
-  ins.save((err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send({
-        flg: 1,
-        message: "Generated Successfully!",
-      });
-    }
-  });
 });
 ///////////////////////////////////////
 
@@ -462,7 +451,27 @@ function generateInvoiceTable(doc, order, sofaname) {
 
   const totalPosition = invoiceTableTop + (i + 1) * 30;
   doc.font("Helvetica-Bold");
-  generateTableRow(doc, totalPosition, "", "", "Total Price", "", order.price);
+  generateTableRow(
+    doc,
+    totalPosition,
+    "",
+    "",
+    "Subtotal    ",
+    "Rs.",
+    order.price
+  );
+  const totalPosition2 = invoiceTableTop + (i + 1) * 40;
+  generateTableRow(doc, totalPosition2, "", "", "GST(5%)", "Rs.", "5600");
+  const totalPosition3 = invoiceTableTop + (i + 1) * 50;
+  generateTableRow(
+    doc,
+    totalPosition3,
+    "",
+    "",
+    "Total Price ",
+    "Rs.",
+    order.price + 5600
+  );
 }
 function generateTableRow(doc, y, c1, c2, c3, c4, c5) {
   doc

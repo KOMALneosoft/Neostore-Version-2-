@@ -9,6 +9,7 @@ const Cartitem = (props) => {
   const navigate = useNavigate();
   const cart2 = useSelector((state) => state.cartitem);
   const [prodata, setProdata] = useState([]);
+  const [error, setError] = useState(0);
   const cart = [];
 
   cart.push(cart2);
@@ -30,7 +31,9 @@ const Cartitem = (props) => {
 
   const handler = (e) => {
     e.preventDefault();
+
     console.log(e.target.value);
+
     setCard(e.target.value);
   };
   const add = (e) => {
@@ -143,9 +146,15 @@ const Cartitem = (props) => {
               type="number"
               placeholder="Enter Credit card details"
               onChange={handler}
+              name="card"
               aria-label="default input example"
               style={{ width: "300px", border: "1px solid green" }}
             />
+            {card.length !== 12 ? (
+              <span style={{ color: "red " }}>
+                Enter valid card number(12 digits)
+              </span>
+            ) : null}
             <br />
             <button
               type="submit"
