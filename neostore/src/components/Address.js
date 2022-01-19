@@ -81,7 +81,11 @@ function Address(props) {
   };
 
   return (
+<<<<<<< HEAD
     <div className="container-fluid" id="addr">
+=======
+    <div className="container-fluid " id="addr">
+>>>>>>> 1162676ef1674188161bb320b576fe48c435fbaa
       {userdata.map((val, index) =>
         val.email === email ? (
           <div className="page-content page-container ">
