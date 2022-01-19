@@ -11,6 +11,7 @@ const initialState = {
   cartitem: [],
   users: [],
   testcart: [],
+  otp: [],
 };
 
 function reducer(state = initialState, actions) {
@@ -27,6 +28,11 @@ function reducer(state = initialState, actions) {
       return {
         ...state,
         users: [],
+      };
+    case "ADDOTP":
+      return {
+        ...state,
+        otp: [...state.otp, item],
       };
 
     case "ADDTOCART":

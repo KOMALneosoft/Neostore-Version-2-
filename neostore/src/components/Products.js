@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, getSearch, getColors } from "../config/Myservice";
-import main from "../images/main.jpeg";
+import { getProducts, getColors, getCategory } from "../config/Myservice";
+
 import { useNavigate, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Dropdown } from "react-bootstrap";
 
 //////////////////////////////////////////////////////
 
 function Products() {
-  const [searchBar, setSearchBar] = useState({ search: "" });
-  const [recommendations, setRecommendations] = useState([]);
+  const [state, setState] = useState({
+    color: "",
+    category: "",
+  });
+  ///////////////////////////////////////////
+  const handler = (event) => {
+    const { name, value } = event.target;
+    setState({ ...state, [name]: value }, () => {});
+  };
+  console.log(state);
+  /////////////////////////////////////////////////
   let navigate = useNavigate();
-  let dispatch = useDispatch();
-  let cart2 = [];
+  const [search, setSearch] = useState([]);
   const [postdata, setPostdata] = useState([]);
-  const [temp, setTemp] = useState([]);
   const [colordata, setColordata] = useState([]);
+  const [categorydata, setCategorydata] = useState([]);
+
   console.log("Email : ", localStorage.getItem("userdetails"));
   console.log("Token : ", localStorage.getItem("_token"));
   //////////////////////////////////////////////////////////////////
@@ -26,15 +33,30 @@ function Products() {
       console.log(token);
       console.log(email);
 
-      getPosts().then((res) => {
+      getProducts().then((res) => {
         console.log(res.data);
         console.log(res.data.err);
         if (res.data.err == 0) {
           setPostdata(res.data.data);
         }
       });
+      getColors().then((res) => {
+        console.log(res.data);
+        console.log(res.data.err);
+        if (res.data.err == 0) {
+          setColordata(res.data.data);
+        }
+      });
+      getCategory().then((res) => {
+        console.log(res.data);
+        console.log(res.data.err);
+        if (res.data.err == 0) {
+          setCategorydata(res.data.data);
+        }
+      });
     }
   }, []);
+  /////////////////////////////////////////////////////
 
   const viewproduct = (id) => {
     const productid = localStorage.setItem("productid", id);
@@ -42,145 +64,203 @@ function Products() {
 
     navigate("/productdetail");
   };
-  ////////////////////////////////////////////////
-  const CategoryFilter = (value) => {
-    const output = temp.filter((currentproduct) => {
-      return currentproduct.category_id.category_name === value;
-    });
 
-    setPostdata(output);
-  };
+  /////////////////////////////////////////////////////
 
-  const ColorFilter = (value) => {
-    const output = postdata.filter((currentproduct) => {
-      return currentproduct.color_id.color_name === value;
-    });
-    setPostdata(output);
+  const clean = () => {
+    setState({ color: "", category: "" });
   };
 
   //////////////////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="container-fluid row ">
       <nav
         id="sidebarMenu"
-        className="collapse d-lg-block sidebar collapse bg-white "
+        style={{ height: "550px" }}
+        className="collapse d-lg-block sidebar collapse bg-white col-md-3 ms-4"
       >
-        <div className="position-sticky">
+        <div className="position-sticky p-2">
           <div className="list-group list-group-flush ">
-            <Dropdown
-              className="nav-item dropdown bg-light m-1"
-              style={{ borderRadius: "10%" }}
-            >
-              <Dropdown.Toggle variant="light" id="dropdown-basic">
-                color
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => ColorFilter("red")}
-                  >
-                    Red
-                  </button>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => ColorFilter("black")}
-                  >
-                    Black
-                  </button>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => ColorFilter("white")}
-                  >
-                    white
-                  </button>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => ColorFilter("blue")}
-                  >
-                    Blue
-                  </button>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown
-              className="nav-item dropdown bg-light m-1"
-              style={{ borderRadius: "10%" }}
-            >
-              <Dropdown.Toggle variant="light" id="dropdown-basic">
-                category
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => CategoryFilter("sectional")}
-                  >
-                    Sectional
-                  </button>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => CategoryFilter("twoseater")}
-                  >
-                    Two seater
-                  </button>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <input
+              className="p-3 m-3 bg-dark text-light btn-dark"
+              type="text"
+              style={{ marginLeft: "35px" }}
+              placeholder="Search....."
+              onChange={(event) => {
+                setSearch(event.target.value);
+              }}
+            />
+            <br />
+            <button className="btn alert-dark"> Categories</button>
+            <label>
+              <input
+                type="radio"
+                name="category"
+                value="sectional"
+                onClick={handler}
+              />
+              Sectional
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                name="category"
+                value="twoseater"
+                onClick={handler}
+              />
+              Two seater
+            </label>
+            <br />
+            <br />
+            <button className="btn alert-dark"> Color</button>
+            <label>
+              <input type="radio" name="color" value="red" onClick={handler} />
+              Red
+            </label>
+            <br />
+            <label>
+              <input type="radio" name="color" value="blue" onClick={handler} />
+              Blue
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                name="color"
+                value="white"
+                onClick={handler}
+              />
+              White
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                name="color"
+                value="black"
+                onClick={handler}
+              />
+              Black
+            </label>
+            <button className="btn btn-outline-dark btn-sm m-5" onClick={clean}>
+              None
+            </button>
           </div>
         </div>
       </nav>
-      <div className="container ">
-        <img src={main} style={{ width: "100%", height: "400px" }} />
-      </div>
-      <div className="row justify-content-center m-2">
-        {postdata.map((val, index) => (
-          <div className="container col-md-4 mt-2 p-3">
-            <div
-              className="container col-md-12 center mb-2 p-3 mt-2"
-              id="cardme"
-              style={{ alignItems: "center" }}
-            >
-              <div className="card m-2">
-                <img
-                  src={val.product_image}
-                  className="card-img-top"
-                  height="200px"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{val.product_name}</h5>
-                  <div className="mb-2">
-                    <span className="font-bold text-danger">
-                      <strong>Rs.{val.product_cost}</strong>
-                    </span>
-                  </div>
 
-                  <div className="text-center row">
-                    <button
-                      type="button"
-                      className="btn btn-dark m-1 col-md-8"
-                      id="addToCart-1"
-                      onClick={(props) => viewproduct(val._id)}
-                    >
-                      View Product
-                    </button>
+      <div className="row justify-content-center m-2 col-md-9">
+        <h5 className="text-center alert-warning p-2 m-1">
+          <div style={{ borderRadius: "40px" }}>
+            Let your home feel the style !!!!
+          </div>
+        </h5>
+        {state.color !== "" && state.category !== ""
+          ? postdata
+              .filter((val) => {
+                if (search == "") {
+                  return val;
+                } else if (
+                  val.product_name.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((val, index) =>
+                colordata.map((color, index) =>
+                  categorydata.map((cate, index) =>
+                    color.color_name === state.color &&
+                    val.color_id == color._id &&
+                    cate.category_name === state.category &&
+                    val.category_id == cate._id ? (
+                      <div className="container col-md-4 mt-2 p-3">
+                        <div
+                          className="container col-md-12 text-center mb-2 p-1 mt-2"
+                          id="cardme"
+                          style={{ alignItems: "center" }}
+                        >
+                          <div className="m-2">
+                            <img
+                              src={val.product_image}
+                              className="card-img-top"
+                              height="200px"
+                            />
+                            <div className="card-body">
+                              <h5 className="card-title">{val.product_name}</h5>
+                              <div className="mb-2">
+                                <span className="font-bold text-danger">
+                                  <strong>Rs.{val.product_cost}</strong>
+                                </span>
+                              </div>
+
+                              <div className="text-center row ">
+                                <center>
+                                  <button
+                                    type="button"
+                                    className="btn btn-dark "
+                                    onClick={(props) => viewproduct(val._id)}
+                                  >
+                                    View Product
+                                  </button>
+                                </center>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null
+                  )
+                )
+              )
+          : postdata
+              .filter((val) => {
+                if (search == "") {
+                  return val;
+                } else if (
+                  val.product_name.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((val, index) => (
+                <div className="container col-md-4 mt-2 p-3">
+                  <div
+                    className="container col-md-12 text-center mb-2 p-1 mt-2"
+                    id="cardme"
+                    style={{ alignItems: "center" }}
+                  >
+                    <div className="m-2">
+                      <img
+                        src={val.product_image}
+                        className="card-img-top"
+                        height="200px"
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title">{val.product_name}</h5>
+                        <div className="mb-2">
+                          <span className="font-bold text-danger">
+                            <strong>Rs.{val.product_cost}</strong>
+                          </span>
+                        </div>
+
+                        <div className="text-center row">
+                          <center>
+                            <button
+                              type="button"
+                              className="btn btn-dark  "
+                              onClick={(props) => viewproduct(val._id)}
+                            >
+                              View Product
+                            </button>
+                          </center>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        ))}
+              ))}
       </div>
     </div>
   );

@@ -29,6 +29,7 @@ const connectDB = async () => {
 connectDB();
 //end
 const productmodel = require("../db/productSchema");
+const addressmodel = require("../db/addressSchema");
 const colormodel = require("../db/colorSchema");
 const categorymodel = require("../db/categorySchema");
 const ordermodel = require("../db/orderSchema");
@@ -88,6 +89,14 @@ router.get("/fetchpost", (req, res) => {
   });
 });
 /////////////////////////////////
+
+router.get("/fetchproduct", (req, res) => {
+  productmodel.find({}, (err, data) => {
+    if (err) throw err;
+    res.json({ err: 0, data: data });
+  });
+});
+
 router.get("/fetchcolor", (req, res) => {
   colormodel.find({}, (err, data) => {
     if (err) throw err;
@@ -109,6 +118,14 @@ router.get("/fetchuser", (req, res) => {
     res.json({ err: 0, data: data });
   });
 });
+
+///////////////////////////////////
+router.get("/fetchaddr", (req, res) => {
+  addressmodel.find({}, (err, data) => {
+    if (err) throw err;
+    res.json({ err: 0, data: data });
+  });
+});
 /////////////////////////////////////
 router.post("/edituser", (req, res) => {
   console.log(req.body.id);
@@ -122,7 +139,6 @@ router.post("/edituser", (req, res) => {
       age: req.body.age,
       gender: req.body.gender,
       mobile: req.body.phone,
-      address: req.body.address,
     },
     function (err, docs) {
       if (err) res.json(err);
@@ -150,12 +166,35 @@ router.post("/changepassword", (req, res) => {
   );
 });
 ////////////////////////////
-router.post("/deleteaddress", (req, res) => {
+
+router.post("/addaddress", (req, res) => {
+  console.log(req.body);
+  let ins = new addressmodel({
+    street: req.body.street,
+    city: req.body.city,
+    state: req.body.state,
+    country: req.body.country,
+    user_id: req.body.userid,
+  });
+  ins.save((err) => {
+    if (err) {
+      console.log(err);
+      res.send("Already Added");
+    } else {
+      res.send("ok");
+    }
+  });
+});
+//////////////////////////////////////////
+router.post("/editaddress", (req, res) => {
   console.log(req.body.id);
-  registermodel.findByIdAndUpdate(
+  addressmodel.findByIdAndUpdate(
     { _id: req.body.id },
     {
-      address: "",
+      street: req.body.street,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
     },
     function (err, docs) {
       if (err) res.json(err);
@@ -165,6 +204,22 @@ router.post("/deleteaddress", (req, res) => {
     }
   );
 });
+///////////////////////////////////////////
+router.post("/deleteaddress", (req, res) => {
+  console.log(req.body.id);
+  addressmodel.findByIdAndRemove(
+    { _id: req.body.id },
+
+    function (err, docs) {
+      if (err) res.json(err);
+      else {
+        console.log(docs);
+        console.log("deleted");
+      }
+    }
+  );
+});
+
 ///////////////////////
 router.get("/verify", (req, res) => {
   registermodel.find({}, (err, data) => {
@@ -470,26 +525,32 @@ router.post("/getSearch", (req, res) => {
 
 router.post("/forgetService", (req, res) => {
   console.log(req.body);
+  registermodel.findOne({ email: req.body.email }, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      let otp = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+      transporter.sendMail(
+        {
+          from: "kkv987654321@gmail.com",
+          to: req.body.email,
+          subject: "Password reset",
 
-  let otp = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-  transporter.sendMail(
-    {
-      from: "kkv987654321@gmail.com",
-      to: req.body.email,
-      subject: "Password reset",
-
-      html: `<h3>Your OTP :</h3>
+          html: `<h3>Your OTP :</h3>
           <h1>${otp}</h1>`,
-    },
-    (error, res) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("mail sent", res);
-        res.send(otp);
-      }
+        },
+        (error, res) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("mail sent", res);
+          }
+        }
+      );
+      res.json({ err: 0, otp: otp });
+      console.log(otp);
     }
-  );
+  });
 });
 
 ///////////////////////////

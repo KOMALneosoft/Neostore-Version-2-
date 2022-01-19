@@ -18,17 +18,6 @@ function MyAccount() {
     });
   }, []);
   /////////////////////////////////////
-  const del = (id) => {
-    axios
-      .post("http://localhost:9000/api/deleteaddress", {
-        id: id,
-      })
-      .then((res) => {
-        console.log("deleted", address);
-        alert("address deleted,If you want to edit then click on edit icon");
-      });
-  };
-
   //////////////////////////////////////
   return (
     <div style={{ height: "440px" }} className="container-fluid" id="acc">
@@ -152,90 +141,71 @@ function MyAccount() {
                                 {val.mobile}
                               </h6>
                             </div>
-                            <br />
-                            <div className="row">
-                              <p
-                                className="col-sm-5 m-b-10 f-w-600"
-                                style={{
-                                  fontFamily: "cursive",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                Address:
-                              </p>
-                              <h6 className="col-sm-7 text-muted f-w-400">
-                                {val.address}
-                                {val.address !== "" ? (
-                                  <button
-                                    className="btn btn-sm btn-outline-dark ms-4"
-                                    style={{ fontSize: "14px" }}
-                                    onClick={del(val._id)}
-                                  >
-                                    <Link to="/myacc" className="text-dark">
-                                      <i className="fa fa-trash text-dark"></i>
-                                    </Link>
-                                  </button>
-                                ) : null}
-                              </h6>
+                            <div className="row p-3">
+                              <Link to="/address">
+                                <button className="btn btn-outline-dark btn-sm col-md-12">
+                                  See Address
+                                </button>
+                              </Link>
                             </div>
-                          </div>
 
-                          <hr />
-                          <ul className="social-link row list-unstyled m-t-40 m-b-10 h3 mt-1">
-                            <li className="col-md-5"></li>
-                            <li className="col-md-2">
-                              <a
-                                href="#!"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
-                                title=""
-                                data-original-title="facebook"
-                                data-abc="true"
-                              >
-                                <i
-                                  className="fa fa-facebook text-success"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </li>
-                            <li className="col-md-2">
-                              <a
-                                href="#!"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
-                                title=""
-                                data-original-title="twitter"
-                                data-abc="true"
-                              >
-                                <i
-                                  className="fa fa-twitter"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </li>
-                            <li className="col-md-2">
-                              <a
-                                href="#!"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
-                                title=""
-                                data-original-title="instagram"
-                                data-abc="true"
-                              >
-                                <i
-                                  className="fa fa-google text-danger"
-                                  aria-hidden="true"
-                                ></i>
-                              </a>
-                            </li>
-                          </ul>
+                            <hr />
+                            <ul className="social-link row list-unstyled m-t-40 m-b-10 h3 mt-1">
+                              <li className="col-md-5"></li>
+                              <li className="col-md-2">
+                                <a
+                                  href="#!"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title=""
+                                  data-original-title="facebook"
+                                  data-abc="true"
+                                >
+                                  <i
+                                    className="fa fa-facebook text-success"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                              </li>
+                              <li className="col-md-2">
+                                <a
+                                  href="#!"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title=""
+                                  data-original-title="twitter"
+                                  data-abc="true"
+                                >
+                                  <i
+                                    className="fa fa-twitter"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                              </li>
+                              <li className="col-md-2">
+                                <a
+                                  href="#!"
+                                  data-toggle="tooltip"
+                                  data-placement="bottom"
+                                  title=""
+                                  data-original-title="instagram"
+                                  data-abc="true"
+                                >
+                                  <i
+                                    className="fa fa-google text-danger"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <hr />
               </div>
-              <hr />
             </div>
           </div>
         ) : null

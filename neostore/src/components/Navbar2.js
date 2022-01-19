@@ -23,7 +23,7 @@ function Navbar2() {
 
   return (
     <div className="">
-      <nav className="navbar bg-dark navbar-expand-sm text-light">
+      <nav className="navbar  bg-dark navbar-expand-sm text-light">
         <Link className="navbar-brand  col-md-3 text-light" to="/">
           <h3 className="ms-3">
             Neo
@@ -43,13 +43,15 @@ function Navbar2() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="menuItems">
+        <div className="collapse navbar-collapse col-md-7" id="menuItems">
           <ul className="navbar-nav mr-3 ">
-            <li className="nav-item active">
-              <Link to="/" className="nav-link text-light">
-                Home
-              </Link>
-            </li>
+            {userme.length > 0 ? (
+              <li className="nav-item active">
+                <Link to="/" className="nav-link text-light">
+                  Home
+                </Link>
+              </li>
+            ) : null}
             {userme.length > 0 ? (
               <li className="nav-item">
                 <Link className="nav-link text-light" to="/products">
@@ -64,6 +66,7 @@ function Navbar2() {
                   className="nav-link text-light"
                   to="/myorder"
                   role="button"
+                  style={{ marginRight: "570px" }}
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
@@ -71,25 +74,16 @@ function Navbar2() {
                 </Link>
               </li>
             ) : null}
-            {/* <li className="m-1" style={{ marginLeft: "520px", height: "40px" }}>
-              <form
-                className="form-inline my-2 my-lg-0 d-flex"
-                style={{ marginLeft: "520px", height: "40px" }}
-              >
-                <input
-                  className="form-control mr-sm-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                ></input>
-                <button type="submit" className="btn btn-outline-primary">
-                  <i className="fa fa-search text-primary h2" />
-                </button>
-              </form>
-            </li> */}
+
+            <li
+              className="m-1 text-dark"
+              style={{ marginLeft: "520px", height: "40px" }}
+            >
+              <h1>neostore</h1>
+            </li>
 
             {userme.length > 0 ? (
-              <li style={{ marginLeft: "400px" }}>
+              <li>
                 <Dropdown
                   className="nav-item dropdown bg-light m-1"
                   style={{ borderRadius: "10%" }}
@@ -100,13 +94,55 @@ function Navbar2() {
 
                   <Dropdown.Menu>
                     <Dropdown.Item>
-                      <Link to="/myacc">My profile</Link>
+                      <Link
+                        to="/myacc"
+                        style={{
+                          color: "blue",
+                          textDecoration: "none",
+                        }}
+                      >
+                        My profile
+                      </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                      <Link to="/settings">Settings</Link>
+                      <Link
+                        to="/editprofile"
+                        style={{
+                          color: "blue",
+                          textDecoration: "none",
+                        }}
+                      >
+                        Edit Profile
+                      </Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                      <Link to="/login" onClick={(e) => logout(e)}>
+                      <Link
+                        to="/settings"
+                        style={{
+                          color: "blue",
+                          textDecoration: "none",
+                        }}
+                      >
+                        Change Password
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link
+                        to="/address"
+                        style={{
+                          color: "blue",
+                          textDecoration: "none",
+                        }}
+                      >
+                        Add Address
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link
+                        to="/login"
+                        className="btn btn-outline-dark"
+                        onClick={(e) => logout(e)}
+                      >
                         Logout
                       </Link>
                     </Dropdown.Item>
@@ -115,7 +151,7 @@ function Navbar2() {
               </li>
             ) : (
               <li>
-                <a href="/login" style={{ marginLeft: "970px" }}>
+                <a href="/login" style={{ marginLeft: "770px" }}>
                   <button className="btn  m-1  btn-outline-warning">
                     Login
                   </button>

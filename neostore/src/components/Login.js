@@ -181,7 +181,7 @@ function Login() {
               </h7>
             </div>
             <br />
-            <Link to="/forgotpassword" className="ms-4">
+            <Link to="/otp" className="ms-4">
               Forgot Password?
             </Link>
           </Form>

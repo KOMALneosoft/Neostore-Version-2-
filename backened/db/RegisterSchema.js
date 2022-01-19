@@ -27,7 +27,7 @@ const RegSchema = new mongoose.Schema({
     required: true,
   },
   address: {
-    type: String,
+    type: Array,
   },
 
   date: {

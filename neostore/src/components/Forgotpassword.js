@@ -6,21 +6,24 @@ import {
 } from "../config/Myservice";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Forgotpassword(props) {
   const navigate = useNavigate();
+  const newemail = useSelector((state) => state.otp);
+
+  console.log("new:", newemail);
 
   const [state, setState] = useState({
     flag: 0,
     otp: null,
-    email: "",
+    otp1: newemail[0].otp,
+    email: newemail[0].email,
     newpassword: "",
   });
-  const [otp, setOtp] = useState(0);
+
   ///////////////////////////////////////////
-  useEffect(() => {
-    setOtp(state.otp);
-  }, []);
+
   ///////////////////////////////////////////////////
 
   const handler = (event) => {
@@ -30,35 +33,24 @@ function Forgotpassword(props) {
     });
   };
   console.log(state);
-  const [userdata, setUserdata] = useState([]);
+
   ////////////////////////////////////////////////////
   ///////////////////////////////////////////////
 
-  const sendmailotp = () => {
-    forgetService({ email: state.email }).then((res) => {
-      setOtp(res.data);
-
-      console.log(res.data);
-      navigate("/forgotpassword");
-    });
-    state.flag = 1;
-    alert("otp sent");
-    navigate("/forgotpassword");
-  };
-
   const resetpass = () => {
     if (state.otp !== null) {
-      if (state.otp === otp) {
+      if (state.otp == state.otp1) {
         setState({ ...state });
+        console.log("otp matched");
+        resetpassService({
+          email: state.email,
+          password: state.newpassword,
+        }).then((res) => {
+          alert(res.data.msg);
+        });
       } else alert("not match");
     }
-    resetpassService({
-      email: state.email,
-      password: state.newpassword,
-    }).then((res) => {
-      alert(res.data.msg);
-      navigate("/login");
-    });
+    navigate("/login");
   };
   /////////////////////////////////////////////////
   //////////////////////////////////////////////
@@ -74,39 +66,35 @@ function Forgotpassword(props) {
                   <div className="row m-l-0 m-r-0">
                     <div className="col-sm-12 bg-c-lite-green user-profile">
                       <div className="card-block text-center text-white">
-                        {state.flag === 0 ? (
-                          <div className="m-b-25 mb-1 alert-danger">
-                            <h4>Enter your email id we will send you OTP </h4>
-                          </div>
-                        ) : null}
+                        <div className="m-b-25 mb-1 alert-danger">
+                          <h4>Enter OTP </h4>
+                        </div>
                       </div>
                     </div>
                     <div className=" container col-sm-8 text-center">
                       <div className="card-block row">
                         <hr />
 
-                        {state.flag === 1 ? (
-                          <div className="row">
-                            <div className="col-sm-5">
-                              <p
-                                className=""
-                                style={{
-                                  fontFamily: "cursive",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                OTP:
-                              </p>
-                            </div>
-                            <input
-                              type="password"
-                              name="otp"
-                              onChange={handler}
-                              className="col-sm-6"
-                              style={{ borderRadius: "6%", height: "30px" }}
-                            />
+                        <div className="row">
+                          <div className="col-sm-5">
+                            <p
+                              className=""
+                              style={{
+                                fontFamily: "cursive",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              OTP:
+                            </p>
                           </div>
-                        ) : null}
+                          <input
+                            type="password"
+                            name="otp"
+                            onChange={handler}
+                            className="col-sm-6"
+                            style={{ borderRadius: "6%", height: "30px" }}
+                          />
+                        </div>
 
                         <div className="row">
                           <div className="col-sm-5">
@@ -129,43 +117,32 @@ function Forgotpassword(props) {
                           />
                         </div>
 
-                        {state.flag === 1 ? (
-                          <div className="row">
-                            <div className="col-sm-5">
-                              <p
-                                className=""
-                                style={{
-                                  fontFamily: "cursive",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                New Password:
-                              </p>
-                            </div>
-                            <input
-                              type="text"
-                              onChange={handler}
-                              name="newpassword"
-                              className="col-sm-6"
-                              style={{ borderRadius: "6%", height: "30px" }}
-                            />
+                        <div className="row">
+                          <div className="col-sm-5">
+                            <p
+                              className=""
+                              style={{
+                                fontFamily: "cursive",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              New Password:
+                            </p>
                           </div>
-                        ) : null}
+                          <input
+                            type="text"
+                            onChange={handler}
+                            name="newpassword"
+                            className="col-sm-6"
+                            style={{ borderRadius: "6%", height: "30px" }}
+                          />
+                        </div>
 
                         <hr />
-                        {state.flag === 0 ? (
-                          <Link to="/forgotpassword">
-                            <div className="btn btn-dark" onClick={sendmailotp}>
-                              Submit
-                            </div>
-                          </Link>
-                        ) : null}
 
-                        {state.flag === 1 ? (
-                          <div className="btn btn-dark" onClick={resetpass}>
-                            Update
-                          </div>
-                        ) : null}
+                        <div className="btn btn-dark" onClick={resetpass}>
+                          Update
+                        </div>
                       </div>
                     </div>
                   </div>

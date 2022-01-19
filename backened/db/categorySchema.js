@@ -10,4 +10,4 @@ const categorySchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-module.exports = mongoose.model("category", categorySchema);
+module.exports = mongoose.model("categories", categorySchema);

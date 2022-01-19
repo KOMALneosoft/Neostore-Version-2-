@@ -5,6 +5,12 @@ let token = localStorage.getItem("_token");
 export function getPosts() {
   return axios.get(`${MAIN_URL}fetchpost`);
 }
+export function getAddress() {
+  return axios.get(`${MAIN_URL}fetchaddr`);
+}
+export function getProducts() {
+  return axios.get(`${MAIN_URL}fetchproduct`);
+}
 
 export function getColors() {
   return axios.get(`${MAIN_URL}fetchcolor`);
@@ -32,9 +38,6 @@ export function getSocialUser(data) {
   return axios.get(`${MAIN_URL}getSocialUser`, data);
 }
 
-export function getSearch(data) {
-  return axios.post(`${MAIN_URL}getSearch`, data);
-}
 export function forgetService(data) {
   return axios.post(`${MAIN_URL}forgetService`, data);
 }

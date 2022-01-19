@@ -41,13 +41,12 @@ function Editprofile(props) {
     axios
       .post("http://localhost:9000/api/edituser", {
         id: id,
-        //email: localStorage.getItem("userdetails"),
+
         fname: state.fname,
         lname: state.lname,
         age: state.age,
         gender: state.gender,
         phone: state.mobile,
-        address: state.address,
       })
       .then((res) => {
         console.log(email);
@@ -213,28 +212,7 @@ function Editprofile(props) {
                               style={{ borderRadius: "6%", height: "30px" }}
                             />
                           </div>
-                          <div className="row">
-                            <div className="col-sm-5">
-                              <p
-                                className=""
-                                style={{
-                                  fontFamily: "cursive",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                Add address:
-                              </p>
-                            </div>
-                            <textarea
-                              rows="20"
-                              cols="30"
-                              name="address"
-                              onChange={handler}
-                              placeholder="add your addresss"
-                              className="col-sm-7"
-                              style={{ borderRadius: "6%", height: "30px" }}
-                            ></textarea>
-                          </div>
+
                           <hr />
                           <ul className="social-link row list-unstyled m-t-40 m-b-10 h3 mt-1">
                             <li className="col-md-5"></li>

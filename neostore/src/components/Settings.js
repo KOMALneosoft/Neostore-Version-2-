@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getUsers } from "../config/Myservice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Settings(props) {
+  const navigate = useNavigate();
   const email = localStorage.getItem("userdetails");
   console.log("email:", email);
   const [state, setState] = useState({
@@ -44,6 +46,7 @@ function Settings(props) {
         console.log(cart);
       });
     alert("Password updated");
+    navigate("/myacc");
   };
 
   return (

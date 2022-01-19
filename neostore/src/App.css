@@ -18,6 +18,9 @@
   position: fixed;
 width: 100%;
 bottom: 0;
+left: 0;
+right: 0;
+top:50%;
 text-align: center;
 }
 
@@ -172,7 +175,7 @@ text-align: center;
 
 #inacc{
   width: 40%;
-  height: 42%;
+  height: 50%;
 
   /* Center vertically and horizontally */
   position: absolute;
@@ -296,7 +299,7 @@ text-align: center;
 }
 
 .sidebar-sticky {
-  position: relative;
+  position: fixed;
   top: 0;
   height: calc(100vh - 48px);
   padding-top: 0.5rem;

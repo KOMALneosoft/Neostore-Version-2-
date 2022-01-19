@@ -80,11 +80,7 @@ const Cartitem = (props) => {
 
   return (
     <div>
-      <div
-        className="container alert-warning pt-3 mt-1"
-        style={{ height: "600px" }}
-        id="cartpage"
-      >
+      <div className="container alert-warning  mt-1 p-5" id="cartpage">
         <h1 className="text-center"> Shopping Cart</h1>
 
         <form method="post">
@@ -97,41 +93,49 @@ const Cartitem = (props) => {
             >
               Empty Cart
             </Link>
-            <table className="table bg-dark text-light">
-              {cart[0] == "" ? (
-                <h4>Your Cart is Empty!!</h4>
-              ) : (
-                prodata.map((val, index) =>
-                  cart[0].map((ele, index) =>
-                    ele.id === val._id ? (
-                      <tr>
-                        <td>
-                          <img
-                            src={val.product_image}
-                            alt="..."
-                            height="80px"
-                          />
-                        </td>
-                        <td>
-                          <h6 name="name">{val.product_name}</h6>
-                        </td>
-                        <td>
-                          <p name="price">Rs. {val.product_cost}</p>
-                        </td>
-                        <span class="text-dark">
-                          {(totprice = totprice + Number(val.product_cost))}
-                        </span>
-                      </tr>
-                    ) : null
+            <div className="row">
+              <table className="table bg-dark text-light col-md-5 ">
+                {cart[0] == "" ? (
+                  <h4>Your Cart is Empty!!</h4>
+                ) : (
+                  prodata.map((val, index) =>
+                    cart[0].map((ele, index) =>
+                      ele.id === val._id ? (
+                        <tr>
+                          <td>
+                            <img
+                              src={val.product_image}
+                              alt="..."
+                              height="80px"
+                            />
+                          </td>
+                          <td>
+                            <h6 name="name">{val.product_name}</h6>
+                          </td>
+                          <td>
+                            <p name="price">Rs. {val.product_cost}</p>
+                          </td>
+                          <span class="text-dark">
+                            {(totprice = totprice + Number(val.product_cost))}
+                          </span>
+                        </tr>
+                      ) : null
+                    )
                   )
-                )
-              )}
-              <tr>
-                <td />
-                <td />
-                <td class="h4">Total : Rs. {totprice}</td>
-              </tr>
-            </table>
+                )}
+              </table>
+              <div className="card col-md-3 p-2 ">
+                <b>
+                  Subtotal : Rs. {totprice}
+                  <br />
+                  {totprice !== 0 ? <h6>GST(5%) : Rs.5600.00</h6> : null}
+                  <br />
+                  {totprice !== 0 ? (
+                    <h3> Total : Rs. {(totprice = totprice + 5600)}.00</h3>
+                  ) : null}
+                </b>
+              </div>
+            </div>
             <hr />
 
             <input
