@@ -81,11 +81,11 @@ function Address(props) {
   };
 
   return (
-    <div className="container-fluid " id="set">
+    <div className="container-fluid " id="addr">
       {userdata.map((val, index) =>
         val.email === email ? (
           <div className="page-content page-container ">
-            <div className="" style={{ width: "100%" }}>
+            <div className="row" style={{ width: "100%" }}>
               <div className="row container d-flex justify-content-center">
                 <div className="col-md-6">
                   <div className="card user-card-full container m-5">
