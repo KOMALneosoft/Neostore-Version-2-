@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+
 function Navbar2() {
   const dispatch = useDispatch();
   let userme = useSelector((state) => state.users);
+  let count = useSelector((state) => state.count);
   console.log("Email logged in:", userme);
 
   const logout = (e) => {
@@ -162,7 +164,7 @@ function Navbar2() {
               <li>
                 <Link to="/cartitem">
                   <button className="btn  m-1 btn-outline-light">
-                    <i className="fa fa-shopping-cart  2x"></i> cart
+                    <i className="fa fa-shopping-cart  2x"></i> cart : {count}
                   </button>
                 </Link>
               </li>

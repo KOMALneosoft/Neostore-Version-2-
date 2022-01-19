@@ -76,6 +76,7 @@ const Cartitem = (props) => {
   console.log(cartitem);
   /////////////////////////////////////////
   const empty = () => {
+    navigate("/products");
     alert("Your cart is empty!!!!!!!");
     cart = [];
     dispatch({
@@ -91,14 +92,13 @@ const Cartitem = (props) => {
 
         <form method="post">
           <div>
-            <Link
-              to="/products"
+            <button
               className="btn bg-danger text-light"
               onClick={empty}
               style={{ marginBottom: "5px" }}
             >
               Empty Cart
-            </Link>
+            </button>
             <div className="row">
               <table className="table bg-dark text-light col-md-5 ">
                 {cart[0] == "" ? (

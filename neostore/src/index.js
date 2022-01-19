@@ -38,12 +38,14 @@ function reducer(state = initialState, actions) {
     case "ADDTOCART":
       return {
         ...state,
+        count: state.count + 1,
         cartitem: [...state.cartitem, item],
       };
     case "REMOVECART":
       return {
         ...state,
         cartitems: [],
+        count: 0,
       };
 
     default:
