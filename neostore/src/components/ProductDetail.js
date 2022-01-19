@@ -56,7 +56,11 @@ function ProductDetail(props) {
                   data-image="black"
                   src={val.product_image}
                   alt=""
+<<<<<<< HEAD
                   height="60%"
+=======
+                 height="60%"
+>>>>>>> 051f991ec6c989634c86b978c775fc5c37d640d9
                   width="80%"
                   id="prodetailimage"
                 />
