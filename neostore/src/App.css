@@ -12,7 +12,14 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+#addr{
 
+  background-image: url("./images/home5.jpg"); 
+  background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  
+}
 
 #foot{
   position: fixed;
