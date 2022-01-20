@@ -44,7 +44,7 @@ function reducer(state = initialState, actions) {
     case "REMOVECART":
       return {
         ...state,
-        cartitems: [],
+        cartitem: [],
         count: 0,
       };
 

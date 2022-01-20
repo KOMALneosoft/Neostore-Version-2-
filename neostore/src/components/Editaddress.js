@@ -61,15 +61,15 @@ function Editaddress(props) {
   };
 
   return (
-    <div className="container-fluid " id="set">
+    <div className="container-fluid " id="addr">
       {userdata.map((val, index) =>
         val.email === email ? (
-          <div className="page-content page-container ">
-            <div className="" style={{ width: "100%" }}>
-              <div className="row container d-flex justify-content-center">
+          <div className="container">
+            <div className="row" style={{ width: "100%" }}>
+              <div className="row d-flex justify-content-center">
                 <div className="col-md-6">
                   <div className="card user-card-full container m-5">
-                    <div className="row m-l-0 m-r-0">
+                    <div className="container">
                       <div className="col-sm-12 bg-c-lite-green user-profile">
                         <div className="card-block text-center text-white">
                           <div className="col-md-12">
@@ -105,6 +105,7 @@ function Editaddress(props) {
                                   >
                                     Edit Your Address
                                   </h4>
+                                  <hr />
                                   <div className="row text-center justify-content-center">
                                     <a className="col-md-12 text-center m-4 p-2">
                                       <form className="col-md-12 text-center">
@@ -226,7 +227,6 @@ function Editaddress(props) {
                   </div>
                 </div>
               </div>
-              <hr />
             </div>
           </div>
         ) : null

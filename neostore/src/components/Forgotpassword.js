@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  forgotpassword,
-  resetpassService,
-  forgetService,
-} from "../config/Myservice";
+import { resetpassService } from "../config/Myservice";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -27,6 +23,7 @@ function Forgotpassword(props) {
   ///////////////////////////////////////////////////
 
   const handler = (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
     setState({ ...state, [name]: value }, () => {
       console.log(state);
@@ -37,7 +34,8 @@ function Forgotpassword(props) {
   ////////////////////////////////////////////////////
   ///////////////////////////////////////////////
 
-  const resetpass = () => {
+  const resetpass = (e) => {
+    e.preventDefault();
     if (state.otp !== null) {
       if (state.otp == state.otp1) {
         setState({ ...state });

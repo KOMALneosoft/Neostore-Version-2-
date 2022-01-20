@@ -109,6 +109,14 @@ text-align: center;
 	  
 }
 
+#det{
+  background-image: url("./images/home5.jpg"); 
+  background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  
+}
+
 #homie{
   background-image: url("./images/home2.jpg"); 
   background-position: center;
@@ -119,11 +127,11 @@ text-align: center;
 
 #inhomie{
   width: 80%;
-  height: 15%;
+  height: 25%;
 
   /* Center vertically and horizontally */
-  position: absolute;
-  top: 38%;
+  position: relative;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 2%;
@@ -138,7 +146,7 @@ text-align: center;
 
 @media only screen and (max-width:700px) {
   #inhomie {
-  height:   50%;
+  height:   80%;
  
   }
 
@@ -148,6 +156,11 @@ text-align: center;
   height:   200%;
 
   }
+  #inedit2{
+    width:100%;
+
+  }
+
   #prodetailimage {
     height: 130%;
    width:70%;
@@ -232,7 +245,6 @@ text-align: center;
   background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-  
 }
 
 

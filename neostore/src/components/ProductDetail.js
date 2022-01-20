@@ -43,15 +43,12 @@ function ProductDetail(props) {
   /////////////////////////////////////////
 
   return (
-    <div>
+    <div className="container-fluid">
       {postdata.map((val, index) =>
         val._id === proid ? (
-          <div className="container" id="prodetail">
-            <div
-              className="container row m-1"
-              style={{ border: "2px solid black" }}
-            >
-              <div className="col-md-5 m-5">
+          <div className="container card p-4" id="prodetail">
+            <div className="container row" style={{}}>
+              <div className="col-md-5 ">
                 <img
                   data-image="black"
                   src={val.product_image}
@@ -62,12 +59,13 @@ function ProductDetail(props) {
                 />
               </div>
 
-              <div className="col-md-5 m-5">
+              <div className="col-md-5 p-4">
                 <div className="product-description" id="prodes">
-                  <span>
+                  <p>
                     <b>Rating :</b>
                     {val.product_rating}
-                  </span>
+                    <i className="fa fa-star text-warning" />
+                  </p>
                   <h1>
                     <b>{val.product_name}</b>
                   </h1>

@@ -31,24 +31,20 @@ function Myorder() {
   /////////////////////////////////////////////
 
   return (
-    <div id="myorder">
-      <div className="container-fluid row " style={{ height: "800px" }}>
-        <div className="container-fluid row">
+    <div className="container-fluid" id="myorder">
+      <div>
+        <div className="row">
           {orderdata.map((val, index) =>
             prevprice == val.price ? (
-              <div
-                className="row"
-                //  / style={{ width: "60%", backgroundColor: "lightsteelblue" }}
-              >
+              <div className="row">
                 <div
                   style={{ width: "60%" }}
-                  className="container  d-flex justify-content-center"
-                  id="order"
+                  className="container d-flex justify-content-center"
                 >
                   <div className="row col-md-12 p-4">
-                    <div className="row m-l-0 p-4">
-                      <div className="card  text-center">
-                        <div className="card-block row">
+                    <div className="row p-4">
+                      <div className="card  text-center p-4">
+                        <div className="row">
                           <h4
                             className="text-center"
                             style={{
@@ -130,8 +126,9 @@ function Myorder() {
                               >
                                 Price:
                               </p>
-                              <h6 className="col-sm-8 text-muted f-w-400">
-                                Rs.{price}
+
+                              <h6 className="col-sm-8  f-w-400">
+                                <b className="text-danger"> Rs. {price}</b>
                               </h6>
                             </div>
                             <br />
@@ -166,8 +163,8 @@ function Myorder() {
                             </div>
                           </div>
                           <ul className="social-link row list-unstyled m-t-40 m-b-10 h3 mt-1">
-                            <li className="col-md-5"></li>
-                            <li className="col-md-2">
+                            <li className="col-md-9"></li>
+                            <li className="col-md-1">
                               <a
                                 href="#!"
                                 data-toggle="tooltip"
@@ -182,7 +179,7 @@ function Myorder() {
                                 ></i>
                               </a>
                             </li>
-                            <li className="col-md-2">
+                            <li className="col-md-1">
                               <a
                                 href="#!"
                                 data-toggle="tooltip"
@@ -197,7 +194,7 @@ function Myorder() {
                                 ></i>
                               </a>
                             </li>
-                            <li className="col-md-2">
+                            <li className="col-md-1">
                               <a
                                 href="#!"
                                 data-toggle="tooltip"

@@ -24,16 +24,18 @@ function Otp() {
   };
   console.log(state);
 
-  const sendmailotp = () => {
+  const sendmailotp = (e) => {
+    e.preventDefault();
     forgetService({ email: state.email }).then((res) => {
-      setOtp1(res.data.otp);
-      console.log(res.data);
-      alert("otp sent");
-      navigate("/forgotpassword");
       dispatch({
         type: "ADDOTP",
         payload: res.data,
       });
+
+      setOtp1(res.data.otp);
+      alert("otp sent");
+      navigate("/forgotpassword");
+      console.log(res.data);
     });
   };
 

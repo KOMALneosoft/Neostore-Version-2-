@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "kkv987654321@gmail.com",
-    pass: "komal@1109",
+    user: "neouse1109@gmail.com",
+    pass: "Komal@2011",
   },
 });
 
@@ -314,7 +314,7 @@ router.post("/addorder", (req, res) => {
 
       transporter.sendMail(
         {
-          from: "kkv987654321@gmail.com",
+          from: "neouse1109@gmail.com",
           to: req.body.user,
           subject: "order Confirmation",
           // text: "Your order has been confirmed!! Thank you!!"
@@ -542,7 +542,7 @@ router.post("/forgetService", (req, res) => {
       let otp = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
       transporter.sendMail(
         {
-          from: "kkv987654321@gmail.com",
+          from: "neouse1109@gmail.com",
           to: req.body.email,
           subject: "Password reset",
 

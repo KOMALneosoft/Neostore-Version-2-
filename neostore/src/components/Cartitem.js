@@ -75,19 +75,19 @@ const Cartitem = (props) => {
   let cartitem = [];
   console.log(cartitem);
   /////////////////////////////////////////
-  const empty = () => {
-    navigate("/products");
-    alert("Your cart is empty!!!!!!!");
-    cart = [];
+  const empty = (e) => {
+    e.preventDefault();
     dispatch({
       type: "REMOVECART",
     });
+    alert("Your cart is empty!!!!!!!");
+    navigate("/products");
   };
   ///////////////////////////////////////////
 
   return (
     <div>
-      <div className="container alert-warning  mt-1 p-5" id="cartpage">
+      <div className="container-fluid alert-warning  mt-1 p-5" id="cartpage">
         <h1 className="text-center"> Shopping Cart</h1>
 
         <form method="post">
@@ -100,7 +100,7 @@ const Cartitem = (props) => {
               Empty Cart
             </button>
             <div className="row">
-              <table className="table bg-dark text-light col-md-5 ">
+              <table className="table bg-dark text-light col-md-5 p-2 ">
                 {cart[0] == "" ? (
                   <h4>Your Cart is Empty!!</h4>
                 ) : (
@@ -108,11 +108,13 @@ const Cartitem = (props) => {
                     cart[0].map((ele, index) =>
                       ele.id === val._id ? (
                         <tr>
+                          <td></td>
                           <td>
                             <img
                               src={val.product_image}
                               alt="..."
                               height="80px"
+                              width="100px"
                             />
                           </td>
                           <td>

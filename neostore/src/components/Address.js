@@ -86,14 +86,14 @@ function Address(props) {
         val.email === email ? (
           <div className="page-content page-container ">
             <div className="row" style={{ width: "100%" }}>
-              <div className="row container d-flex justify-content-center">
-                <div className="col-md-6">
-                  <div className="card user-card-full container m-5">
-                    <div className="row m-l-0 m-r-0">
-                      <div className="col-sm-12 bg-c-lite-green user-profile">
+              <div className="row justify-content-center">
+                <div className="container col-md-5">
+                  <div className="card container m-5">
+                    <div className="container-fluid">
+                      <div className="col-md-12 bg-c-lite-green user-profile">
                         <div className="card-block text-center text-white">
                           <div className="col-md-12">
-                            <div className="m-b-25 mb-1 col-md-12 text-dark">
+                            <div className="col-md-12 text-dark">
                               {val.gender !== "female" ? (
                                 <img
                                   src="https://img.icons8.com/bubbles/100/000000/user.png"
