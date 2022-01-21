@@ -4,7 +4,7 @@ import { getOrders, getPosts } from "../config/Myservice";
 function Myorder() {
   const [orderdata, setOrderdata] = useState([]);
   const [postdata, setPostdata] = useState([]);
-  const [rdata, setRdata] = useState([]);
+
   const price = localStorage.getItem("price");
   const prevprice = localStorage.getItem("prevsprice");
   console.log(price);
@@ -35,7 +35,7 @@ function Myorder() {
       <div>
         <div className="row">
           {orderdata.map((val, index) =>
-            prevprice == val.price ? (
+            price == val.price ? (
               <div className="row">
                 <div
                   style={{ width: "60%" }}

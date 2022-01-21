@@ -319,10 +319,11 @@ router.post("/addorder", (req, res) => {
           subject: "order Confirmation",
           // text: "Your order has been confirmed!! Thank you!!"
           html: `<h1>Your Order has been confirmed!!Thank you!!</h1>
+          <h4>hello, ${req.body.user}</h4>
           <table border='1'>
           <thead>
           <tr>
-          <th>name</th>
+          <th>Items Name</th>
           <th>Price</th>
           <th>Card</th>
           </tr>
@@ -334,7 +335,9 @@ router.post("/addorder", (req, res) => {
           <td>${req.body.card}</td>
           </tr>
           </tbody>
-          </table>`,
+          </table>
+          <br/>
+          <h6>You can see bill  in below pdf</h6>`,
           attachments: [
             {
               // use URL as an attachment
@@ -426,7 +429,7 @@ function generateCustomerInformation(doc, order, sofaname) {
     .text(`User: ${order.user}`, 50, 215)
 
     .font("Helvetica-Bold")
-    .text(`Price:${order.price}`, 300, 200)
+    .text(`Price : Rs.${order.price}`, 300, 200)
     .font("Helvetica")
     .text(`Card:${order.card}`, 300, 215)
     .moveDown();
@@ -438,13 +441,21 @@ function generateInvoiceTable(doc, order, sofaname) {
   const invoiceTableTop = 330;
 
   doc.font("Helvetica-Bold");
-  generateTableRow(doc, invoiceTableTop, "Items");
+  generateTableRow(doc, invoiceTableTop, "Items", "", "quantity", "", "price");
   generateHr(doc, invoiceTableTop + 20);
   doc.font("Helvetica");
   for (i = 0; i < order.cart.length; i++) {
     const item = order.cart[i];
     const position = invoiceTableTop + (i + 1) * 30;
-    generateTableRow(doc, position, item.name);
+    generateTableRow(
+      doc,
+      position,
+      item.name,
+      "",
+      item.quantity,
+      "Rs.",
+      item.price
+    );
 
     generateHr(doc, position + 20);
   }

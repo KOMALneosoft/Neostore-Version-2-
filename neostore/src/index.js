@@ -41,12 +41,45 @@ function reducer(state = initialState, actions) {
         count: state.count + 1,
         cartitem: [...state.cartitem, item],
       };
+    case "DELETECART":
+      return {
+        ...state,
+        cartitem: state.cartitem.filter((items, index) => items.id !== item),
+        count: state.count - 1,
+      };
+
     case "REMOVECART":
       return {
         ...state,
         cartitem: [],
         count: 0,
       };
+    case "INCREASE": {
+      const index = state.cartitem.findIndex((items) => items.id == item);
+      console.log(index);
+      const newArray = [...state.cartitem];
+      console.log(newArray);
+      newArray[index].quantity = newArray[index].quantity + 1;
+      return {
+        ...state,
+        cartitem: newArray,
+      };
+    }
+    case "DECREASE": {
+      const index = state.cartitem.findIndex((items) => items.id == item);
+      console.log(index);
+      const newArray = [...state.cartitem];
+      console.log(newArray);
+      if (newArray[index].quantity > 1) {
+        newArray[index].quantity = newArray[index].quantity - 1;
+      } else {
+        newArray[index].quantity = 1;
+      }
+      return {
+        ...state,
+        cartitem: newArray,
+      };
+    }
 
     default:
       return state;

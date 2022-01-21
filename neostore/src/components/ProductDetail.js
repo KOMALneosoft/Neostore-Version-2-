@@ -26,7 +26,7 @@ function ProductDetail(props) {
   }, []);
   //////////////////////////////////
 
-  const addtocarty = (id, name, price) => {
+  const addtocarty = (id, name, price, quantity) => {
     cart2 = [...cart2, { id, name, price }];
     alert("Added to cart");
     console.log("cart2:", cart2);
@@ -37,6 +37,7 @@ function ProductDetail(props) {
         id: id,
         name: name,
         price: price,
+        quantity: quantity,
       },
     });
   };
@@ -48,7 +49,7 @@ function ProductDetail(props) {
         val._id === proid ? (
           <div className="container card p-4" id="prodetail">
             <div className="container row" style={{}}>
-              <div className="col-md-5 ">
+              <div className="col-md-5 mt-3 ">
                 <img
                   data-image="black"
                   src={val.product_image}
@@ -61,7 +62,7 @@ function ProductDetail(props) {
 
               <div className="col-md-5 p-4">
                 <div className="product-description" id="prodes">
-                  <p>
+                  <p className="mt-4">
                     <b>Rating :</b>
                     {val.product_rating}
                     <i className="fa fa-star text-warning" />
@@ -95,7 +96,7 @@ function ProductDetail(props) {
                 <button
                   className="btn btn-primary"
                   onClick={(props) =>
-                    addtocarty(val._id, val.product_name, val.product_cost)
+                    addtocarty(val._id, val.product_name, val.product_cost, 1)
                   }
                 >
                   <span

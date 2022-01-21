@@ -9,7 +9,7 @@ const Cartitem = (props) => {
   const navigate = useNavigate();
   const cart2 = useSelector((state) => state.cartitem);
   const [prodata, setProdata] = useState([]);
-  const [error, setError] = useState(0);
+  const [counter, setCounter] = useState(1);
   const cart = [];
 
   cart.push(cart2);
@@ -26,7 +26,7 @@ const Cartitem = (props) => {
     });
   }, []);
   console.log(prodata);
-  console.log(cart);
+
   const [card, setCard] = useState("");
 
   const handler = (e) => {
@@ -43,7 +43,7 @@ const Cartitem = (props) => {
     localStorage.setItem("price", Final);
     axios
       .post("http://localhost:9000/api/addorder", {
-        price: totprice,
+        price: Final,
         cart: cart[0],
         card: card,
         user: localStorage.getItem("userdetails"),
@@ -83,7 +83,35 @@ const Cartitem = (props) => {
     alert("Your cart is empty!!!!!!!");
     navigate("/products");
   };
+  ////////////////////////////////////
+  const cartfilter = (e, id) => {
+    e.preventDefault();
+
+    dispatch({
+      type: "DELETECART",
+      payload: id,
+    });
+    alert("Your cart item deleted!!!!!!!");
+  };
   ///////////////////////////////////////////
+  const increase = (e, id) => {
+    e.preventDefault();
+    dispatch({
+      type: "INCREASE",
+      payload: id,
+    });
+    console.log("increase element id:", id);
+  };
+  //////////////////////////////////////////
+  const decrease = (e, id) => {
+    e.preventDefault();
+    console.log("decrease element id:", id);
+    dispatch({
+      type: "DECREASE",
+      payload: id,
+    });
+  };
+  //////////////////////////////////////////
 
   return (
     <div>
@@ -123,9 +151,38 @@ const Cartitem = (props) => {
                           <td>
                             <p name="price">Rs. {val.product_cost}</p>
                           </td>
+                          <td>
+                            <button
+                              onClick={(e) => decrease(e, ele.id)}
+                              className="btn bg-dark "
+                              style={{ borderRadius: "50%", fontSize: "20px" }}
+                            >
+                              <i className="fa fa-minus-circle  text-danger " />
+                            </button>
+                            {ele.quantity}
+                            <button
+                              onClick={(e) => increase(e, ele.id)}
+                              className="btn bg-dark "
+                              style={{ borderRadius: "50%", fontSize: "20px" }}
+                            >
+                              <i className="fa fa-plus-circle  text-danger " />
+                            </button>
+                          </td>
                           <span class="text-dark">
-                            {(totprice = totprice + Number(val.product_cost))}
+                            {
+                              (totprice =
+                                totprice +
+                                Number(val.product_cost * ele.quantity))
+                            }
                           </span>
+                          <td>
+                            <button
+                              className="btn  btn-outline-light"
+                              onClick={(e) => cartfilter(e, val._id)}
+                            >
+                              <i className="fa fa-trash text-light" />
+                            </button>
+                          </td>
                         </tr>
                       ) : null
                     )
